@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,14 +6,21 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  isScrollingUp: boolean = true;
-  lastScrollTop: number = 0;
-  isScrollingDown: boolean = false;
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const st = window.pageYOffset || document.documentElement.scrollTop;
-    this.isScrollingUp = st < this.lastScrollTop;
-    this.lastScrollTop = st <= 0 ? 0 : st;
-    this.isScrollingDown = st! > 0;
+  showMenu = false;
+  navigation = {
+    items: [
+      { text: 'Home', url: '/' },
+      { text: 'About', url: '/about' },
+      { text: 'Services', url: '/services' },
+      { text: 'Contact', url: '/contact' },
+    ],
+  };
+  settings = {
+    logo: 'assets/GOMPASS PRIMARY LOGO.svg', // Replace with your logo path or remove if not needed
+    site_name: 'Your Site Name',
+  };
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
   }
 }
